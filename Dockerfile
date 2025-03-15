@@ -1,4 +1,4 @@
-FROM centos:7
+FROM dokken/centos-stream-9
 
 ARG TARGET_FOLDER=/opt/nerve
 
@@ -9,12 +9,22 @@ RUN yum install epel-release -y && \
     yum install -y python3 && \
     yum install -y python3-pip && \
     yum install -y python3-devel && \
+    yum install -y postgresql-devel && \
+    yum install -y libffi-devel && \
     yum install -y wget && \
     yum clean all
 
+RUN yum install -y zlib-devel && \
+    yum install -y libjpeg-devel && \
+    yum install -y libpng-devel &&\
+    yum install -y freetype-devel && \
+    yum install -y lcms2-devel && \
+    yum install -y libtiff-devel && \
+    yum install -y tk-devel && \
+    yum install -y tcl-devel && \
+    yum clean all
 
-RUN wget https://nmap.org/dist/nmap-7.90-1.x86_64.rpm
-RUN rpm -ivh nmap-*.x86_64.rpm
+RUN yum install nmap -y
 
 RUN mkdir /opt/nerve
 
@@ -43,4 +53,3 @@ RUN chmod 755 start.sh
 ENTRYPOINT ["/opt/nerve/start.sh"]
 
 EXPOSE 8080/tcp
-
