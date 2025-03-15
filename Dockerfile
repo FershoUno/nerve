@@ -1,4 +1,4 @@
-FROM dokken/centos-stream-9
+FROM fershouno/centos-stream:9
 
 ARG TARGET_FOLDER=/opt/nerve
 
